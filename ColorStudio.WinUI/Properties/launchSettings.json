@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ColorfulWorld (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ColorfulWorld (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
