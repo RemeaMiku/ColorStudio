@@ -48,7 +48,7 @@ public readonly struct Color : IEquatable<Color>
                 _value = System.Drawing.Color.FromArgb(_value.A, _value.R, _value.G, _value.B);
         }
     }
-    public string Html
+    public string ArgbAsHex
     {
         get => ColorTranslator.ToHtml(_value);
         init
@@ -56,7 +56,7 @@ public readonly struct Color : IEquatable<Color>
             _value = ColorTranslator.FromHtml(value);
         }
     }
-    public string Argb => string.Join(',', A, R, G, B);
+    //public string Argb => string.Join(',', A, R, G, B);
     public readonly static Color Empty = new();
     private readonly string? _name;
     public Color()
@@ -118,4 +118,38 @@ public readonly struct Color : IEquatable<Color>
     public override string ToString() => Name;
     public bool IsEmpty => _value.IsEmpty;
     public override int GetHashCode() => _value.GetHashCode();
+    public float DistanceFrom(Color other, ColorDistanceMode mode = ColorDistanceMode.RedMean)
+        => DistanceBetween(this, other, mode);
+    public static float DistanceBetween(Color left, Color right, ColorDistanceMode mode = ColorDistanceMode.RedMean) => mode switch
+    {
+        ColorDistanceMode.RedMean => DistanceBetweenCommon(left, right),
+        ColorDistanceMode.CIEDE2000 => throw new NotImplementedException(),
+        _ => DistanceBetweenCommon(left, right),
+    };
+    /// <summary>
+    /// https://zh.wikipedia.org/wiki/%E9%A2%9C%E8%89%B2%E5%B7%AE%E5%BC%82
+    /// </summary>
+    /// <param name="color1"></param>
+    /// <param name="color2"></param>
+    /// <returns></returns>
+    private static float DistanceBetweenCommon(Color color1, Color color2)
+    {
+        var meanR = (color1.R + color2.R) / 2f;
+        var dR = color1.R - color2.R;
+        var dG = color1.G - color2.G;
+        var dB = color1.B - color2.B;
+        var dC = Sqrt((2 + meanR / 256) * dR * dR + 4 * dG * dG + (2 + (255 - meanR) / 256) * dB * dB);
+        return (float)dC;
+    }
+
+    public static Color Average(Color color1, Color color2)
+        => new((int)Round((color1.R + color2.R) / 2f), (int)Round((color1.G + color2.G) / 2f), (int)Round((color1.B + color2.B) / 2f));
+
+    public static Color Average(IEnumerable<Color> colors)
+    {
+        var r = (int)Round(colors.Average(c => c.R));
+        var g = (int)Round(colors.Average(c => c.G));
+        var b = (int)Round(colors.Average(c => c.B));
+        return new(r, g, b);
+    }
 }

@@ -1,41 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ColorStudio.MAUI.MainPage">
-
+<ContentPage
+    x:Class="ColorStudio.MAUI.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cs="clr-namespace:ColorStudio.Shared;assembly=ColorStudio.Shared"
+    xmlns:local="clr-namespace:ColorStudio.MAUI"
+    xmlns:vw="clr-namespace:ColorStudio.MAUI.ViewModels"
+    x:DataType="local:MainPage">
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
+        <VerticalStackLayout Spacing="20">
+            <Image HeightRequest="200" Source="{Binding ViewModel.ImageSource, Mode=OneWay}" />
+            <Label Text="{Binding ViewModel.FilePath, Mode=OneWay}" />
+            <Button Command="{Binding ViewModel.PickImageCommand, Mode=OneTime}" Text="选择图片" />
+            <ListView ItemsSource="{Binding ViewModel.ThemeColors}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vw:ColorViewModel">
+                        <ViewCell>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Rectangle
+                                    BackgroundColor="{Binding AsMauiColor}"
+                                    HeightRequest="39"
+                                    WidthRequest="39" />
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Data.ArgbAsHex}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

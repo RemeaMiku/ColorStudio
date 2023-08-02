@@ -2,12 +2,12 @@
 
 public class Palette
 {
-    private const int _maxCount = 16;
+    public const int Capacity = 16;
     public string? Name { get; set; }
     public string? Description { get; set; }
     public bool IsEmpty => Colors.Count == 0;
     public DateTimeOffset CreationTime { get; } = DateTimeOffset.Now;
-    public List<Color> Colors { get; } = new(_maxCount);
+    public List<Color> Colors { get; } = new(Capacity);
     public readonly static Palette Empty = new();
     public Palette(string? name = null, string? description = null)
     {
@@ -16,8 +16,8 @@ public class Palette
     }
     public Palette AddColor(Color color)
     {
-        if (Colors.Count == _maxCount)
-            throw new InvalidOperationException($"The maximum capacity ({_maxCount}) has been reached");
+        if (Colors.Count == Capacity)
+            throw new InvalidOperationException($"The maximum capacity ({Capacity}) has been reached");
         Colors.Add(color);
         return this;
     }

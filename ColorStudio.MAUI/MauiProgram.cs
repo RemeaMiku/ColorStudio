@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ColorStudio.MAUI.Services;
+using ColorStudio.MAUI.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace ColorStudio.MAUI
 {
@@ -13,12 +15,15 @@ namespace ColorStudio.MAUI
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
+                })
+                .Services
+                .AddSingleton<ThemeColorExtractionService>()
+                .AddSingleton(MediaPicker.Default)
+                .AddSingleton<MainPageViewModel>()
+                .AddSingleton<MainPage>();
 #if DEBUG
-		builder.Logging.AddDebug();
-#endif
-
+            builder.Logging.AddDebug();
+#endif             
             return builder.Build();
         }
     }
