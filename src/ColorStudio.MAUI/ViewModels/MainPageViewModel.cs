@@ -13,7 +13,7 @@ public partial class MainPageViewModel : ObservableObject
     string _filePath = string.Empty;
     public ObservableCollection<ColorViewModel> ThemeColors { get; } = new();
 
-    int _maxSize = 4;
+    int _maxSize = 8;
     public ImageSource ImageSource => ImageSource.FromFile(FilePath);
     public MainPageViewModel(IMediaPicker mediaPicker, ThemeColorExtractionService themeColorExtractionService)
     {
@@ -29,10 +29,7 @@ public partial class MainPageViewModel : ObservableObject
             Title = "选择图片",
         });
         if (result == null)
-        {
-            FilePath = string.Empty;
             return;
-        }
         FilePath = result.FullPath;
         ThemeColors.Clear();
         try

@@ -70,10 +70,10 @@ public readonly struct Color : IEquatable<Color>
         _value = ColorTranslator.FromHtml(argb);
     }
 
-    public Color(uint argb, string? name = null)
+    public Color(int argb, string? name = null)
     {
         _name = name;
-        _value = System.Drawing.Color.FromArgb(unchecked((int)argb));
+        _value = System.Drawing.Color.FromArgb(argb);
     }
 
     public Color(int r, int g, int b, int a = 255, string? name = null)

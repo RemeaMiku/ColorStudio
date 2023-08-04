@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.Shared", "ColorStudio.Shared\ColorStudio.Shared.csproj", "{8F114E98-74EF-4D76-8E74-D6235CD712FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.Shared", "src\ColorStudio.Shared\ColorStudio.Shared.csproj", "{8F114E98-74EF-4D76-8E74-D6235CD712FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.MAUI", "ColorStudio.MAUI\ColorStudio.MAUI.csproj", "{E15A3B34-FDE6-4CBC-8FFC-A87FDAC944FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.MAUI", "src\ColorStudio.MAUI\ColorStudio.MAUI.csproj", "{E15A3B34-FDE6-4CBC-8FFC-A87FDAC944FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.Console", "ColorStudio.Console\ColorStudio.Console.csproj", "{691E3C55-06DD-4F4F-8876-2C1F23D40396}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorStudio.Console", "src\ColorStudio.Console\ColorStudio.Console.csproj", "{691E3C55-06DD-4F4F-8876-2C1F23D40396}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
